@@ -17,6 +17,10 @@
 		921B79D319D8752200723D9C /* Kawaii_KeyboardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B79D219D8752200723D9C /* Kawaii_KeyboardTests.m */; };
 		921B79E619D8874300723D9C /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B79E519D8874300723D9C /* KeyboardViewController.m */; };
 		921B79E919D8874300723D9C /* Kawaii Key.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 921B79E019D8874300723D9C /* Kawaii Key.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		92D0D04C19E50557004A98C4 /* KeyboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D0D04B19E50557004A98C4 /* KeyboardViewController.xib */; };
+		92D0D04E19E78C28004A98C4 /* emojiDict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92D0D04D19E78C28004A98C4 /* emojiDict.plist */; };
+		92D0D04F19E7A26C004A98C4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 921B79C319D8752200723D9C /* Images.xcassets */; };
+		92D0D05219E7A58D004A98C4 /* KeyboardPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D0D05119E7A58D004A98C4 /* KeyboardPreference.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +81,10 @@
 		921B79E319D8874300723D9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		921B79E419D8874300723D9C /* KeyboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardViewController.h; sourceTree = "<group>"; };
 		921B79E519D8874300723D9C /* KeyboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardViewController.m; sourceTree = "<group>"; };
+		92D0D04B19E50557004A98C4 /* KeyboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardViewController.xib; sourceTree = "<group>"; };
+		92D0D04D19E78C28004A98C4 /* emojiDict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emojiDict.plist; sourceTree = "<group>"; };
+		92D0D05019E7A58D004A98C4 /* KeyboardPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardPreference.h; sourceTree = "<group>"; };
+		92D0D05119E7A58D004A98C4 /* KeyboardPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardPreference.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,8 +178,12 @@
 		921B79E119D8874300723D9C /* Kawaii Key */ = {
 			isa = PBXGroup;
 			children = (
+				92D0D04B19E50557004A98C4 /* KeyboardViewController.xib */,
 				921B79E419D8874300723D9C /* KeyboardViewController.h */,
 				921B79E519D8874300723D9C /* KeyboardViewController.m */,
+				92D0D05019E7A58D004A98C4 /* KeyboardPreference.h */,
+				92D0D05119E7A58D004A98C4 /* KeyboardPreference.m */,
+				92D0D04D19E78C28004A98C4 /* emojiDict.plist */,
 				921B79E219D8874300723D9C /* Supporting Files */,
 			);
 			path = "Kawaii Key";
@@ -308,6 +320,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92D0D04F19E7A26C004A98C4 /* Images.xcassets in Resources */,
+				92D0D04C19E50557004A98C4 /* KeyboardViewController.xib in Resources */,
+				92D0D04E19E78C28004A98C4 /* emojiDict.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				921B79E619D8874300723D9C /* KeyboardViewController.m in Sources */,
+				92D0D05219E7A58D004A98C4 /* KeyboardPreference.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +532,7 @@
 		921B79ED19D8874300723D9C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -530,6 +547,7 @@
 		921B79EE19D8874300723D9C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Kawaii Key/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -556,6 +574,7 @@
 				921B79D819D8752200723D9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		921B79D919D8752200723D9C /* Build configuration list for PBXNativeTarget "Kawaii KeyboardTests" */ = {
 			isa = XCConfigurationList;
@@ -564,6 +583,7 @@
 				921B79DB19D8752200723D9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		921B79EC19D8874300723D9C /* Build configuration list for PBXNativeTarget "Kawaii Key" */ = {
 			isa = XCConfigurationList;
@@ -572,6 +592,7 @@
 				921B79EE19D8874300723D9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

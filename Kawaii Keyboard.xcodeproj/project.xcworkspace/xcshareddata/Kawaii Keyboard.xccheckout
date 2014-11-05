@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>385D22DB-FCB2-4CB4-872C-B8F5C360C708</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Kawaii Keyboard</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FDFA8B642CD82737C1CBFB14CEB8EB0C709CE103</key>
+		<string>https://github.com/rivenn/kawaiikeys.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Kawaii Keyboard.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FDFA8B642CD82737C1CBFB14CEB8EB0C709CE103</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/rivenn/kawaiikeys.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FDFA8B642CD82737C1CBFB14CEB8EB0C709CE103</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FDFA8B642CD82737C1CBFB14CEB8EB0C709CE103</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Kawaii%20Keyboard</string>
+		</dict>
+	</array>
+</dict>
+</plist>

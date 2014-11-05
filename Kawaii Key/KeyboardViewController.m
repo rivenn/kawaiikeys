@@ -1,91 +1,76 @@
 #import "KeyboardViewController.h"
 
+#import "KeyboardPreference.h"
+
 static NSString *reuseID = @"BNNCOLCELL";
 
-@interface KeyboardViewController () <UICollectionViewDataSource, UICollectionViewDelegate,  UICollectionViewDelegateFlowLayout>
+@interface KeyboardViewController () <UICollectionViewDataSource, UICollectionViewDelegate >
+
+@property (nonatomic, strong) NSDictionary *emojiDict;
 @property (nonatomic, strong) NSArray *emojiList;
 
-@property (nonatomic, strong) UICollectionView *colview;
-@property (nonatomic, strong) UIButton *nextKeyboardButton;
-
-@property (nonatomic, strong) NSLayoutConstraint *leftCons,*rightCons;
-@property (nonatomic, strong) NSLayoutConstraint *topCons,*bottomCons;
 @end
 
 @implementation KeyboardViewController
 
+#pragma mark - Init Methods
+
+- (void)initialzeData {
+  // Data
+  NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"emojiDict" ofType:@"plist"];
+  self.emojiDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+  self.emojiList = self.emojiDict[@"helpless"];
+}
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  self = [super initWithNibName:@"KeyboardViewController" bundle:[NSBundle mainBundle]];
   if (self) {
-    self.emojiList = @[@"NEXT", @"^v^", @"TOT", @"<.<"];
+    [self initialzeData];
+    NSLog(@"initializing data... w/nib");
   }
   return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    [self initialzeData];
+    NSLog(@"initializing data... w/coder");
+  }
+  return self;
+}
+
+#pragma mark - View Methods
+
 - (void)updateViewConstraints {
     [super updateViewConstraints];
     // Add custom view sizing constraints here
-}
-
-- (void)addCollectionView {
-  UICollectionViewLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-
-  self.colview = [[UICollectionView alloc] initWithFrame:self.view.frame
-                                    collectionViewLayout:flowLayout];
-  [self.colview registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseID];
-  self.colview.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f];
-  self.colview.delegate = self;
-  self.colview.dataSource = self;
-  self.colview.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-  
-  [self.view insertSubview:self.colview atIndex:0];
-}
-
-- (UIButton *)xxNextKeyboardButton {
-  // Perform custom UI setup here
-  self.nextKeyboardButton = [UIButton buttonWithType:UIButtonTypeSystem];
-  [self.nextKeyboardButton setTitle:@"NEXT KEYBD"
-                           forState:UIControlStateNormal];
-  [self.nextKeyboardButton sizeToFit];
-  self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = NO;
-  
-  [self.nextKeyboardButton addTarget:self
-                              action:@selector(advanceToNextInputMode)
-                    forControlEvents:UIControlEventTouchUpInside];
-  return self.nextKeyboardButton;
-}
-
-- (UIButton *)buttonWithText:(NSString *)text {
-  UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-  
-  btn.layer.borderColor = [[UIColor whiteColor] CGColor];
-  btn.layer.borderWidth = 2.0f;
-  btn.layer.cornerRadius = 5.0f;
-  btn.userInteractionEnabled = NO;
-  
-  [btn setTitle:text forState:UIControlStateNormal];
-  [btn sizeToFit];
-
-  return btn;
+  NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.backButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.spacebarButton attribute:NSLayoutAttributeHeight multiplier:1.0 constant:1.0];
+  [self.view addConstraint:constraint];
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // add views to keyboard
-  
-  [self addCollectionView];
-  // add constraints
-  
-  self.leftCons = [NSLayoutConstraint constraintWithItem:self.colview attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0];
-  self.rightCons = [NSLayoutConstraint constraintWithItem:self.colview attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0 constant:0.0];
-  self.topCons = [NSLayoutConstraint constraintWithItem:self.colview attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0];
-  self.bottomCons = [NSLayoutConstraint constraintWithItem:self.colview attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
-  [self.view addConstraints:@[self.leftCons, self.rightCons,self. topCons, self.bottomCons]];
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated
+  [self.colview registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseID];
+  [self setCollectionViewUIToPreference:self.colview];
+  
+  [self setButtonUIToPreference:self.backButton];
+  [self setButtonUIToPreference:self.enterButton];
+  [self setButtonUIToPreference:self.nextKeyboardButton];
+  [self setButtonUIToPreference:self.spacebarButton];
+  
+  NSArray *keys = [self.emojiDict allKeys];
+  [self.segmentedControl removeAllSegments];
+  for (int i=0; i<[keys count]; i++) {
+    [self.segmentedControl insertSegmentWithTitle:[keys objectAtIndex:i] atIndex:i animated:NO];
+  }
+  self.segmentedControl.selectedSegmentIndex=0;
+  [self valueChanged:self.segmentedControl];
+  
+  
+
+  
 }
 
 - (void)textWillChange:(id<UITextInput>)textInput {
@@ -105,9 +90,10 @@ static NSString *reuseID = @"BNNCOLCELL";
 }
 
 #pragma mark - UICollectionView Data Source
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-  return 3;
+  return [self.emojiList count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -118,13 +104,9 @@ static NSString *reuseID = @"BNNCOLCELL";
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
   UICollectionViewCell *cell = [collectionView
       dequeueReusableCellWithReuseIdentifier:reuseID forIndexPath:indexPath];
-  /*
-  cell.layer.borderColor = [[UIColor blackColor] CGColor];
-  cell.layer.borderWidth = 1.0f;
-  cell.layer.cornerRadius = 3.0f;
-  */
-
-  [cell.contentView addSubview:[self buttonWithText:[self.emojiList objectAtIndex:indexPath.row]]];
+  
+  UIButton *btn = [self buttonWithText:[self.emojiList objectAtIndex:indexPath.row]];
+  [cell.contentView addSubview:btn];
   return cell;
 }
 
@@ -133,27 +115,70 @@ static NSString *reuseID = @"BNNCOLCELL";
 - (void)collectionView:(UICollectionView *)collectionView
     didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
   [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-  if (indexPath.row == 0) {
-    [self advanceToNextInputMode];
-  }else{
-    [self.textDocumentProxy insertText:self.emojiList[indexPath.row]];
-  }
+  [self.textDocumentProxy insertText:self.emojiList[indexPath.row]];
 }
 
-#pragma mark - UICollectionView Delegate FlowLayout
+#pragma mark - Action Methods
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-                   layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-  return 10.0f;
+-(IBAction)emojiTextButtonPressed:(id)sender {
+  UIButton *btn = (UIButton *)sender;
+  [self.textDocumentProxy insertText:btn.titleLabel.text];
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-                   layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-  return 10.0f;
+-(IBAction)nextKeyboardPressed:(id)sender{
+  [self advanceToNextInputMode];
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-  return CGSizeMake(30, 30);
+-(IBAction)dismissPressed:(id)sender {
+  [self dismissKeyboard];
+}
+
+- (IBAction)backPressed:(id)sender {
+  [self.textDocumentProxy deleteBackward];
+}
+
+- (IBAction)spacePressed:(id)sender {
+  [self.textDocumentProxy insertText:@" "];
+}
+
+- (IBAction)enterPressed:(id)sender {
+  [self dismissKeyboard];
+}
+
+- (IBAction)valueChanged:(id)sender {
+  UISegmentedControl *sctrl = (UISegmentedControl *)sender;
+  
+  NSArray *keys = [self.emojiDict allKeys];
+  self.emojiList = self.emojiDict[keys[sctrl.selectedSegmentIndex]];
+  [self.colview reloadData];
+}
+
+
+#pragma mark - Helper Methods
+
+- (UIButton *)buttonWithText:(NSString *)text {
+  UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+  btn.frame = CGRectMake(5, 0, 54, 40);
+  [btn setTitle:text forState:UIControlStateNormal];
+  [btn addTarget:self action:@selector(emojiTextButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+  [self setButtonUIToPreference:btn];
+  return btn;
+}
+
+- (void)setButtonUIToPreference:(UIButton *)button {
+  button.backgroundColor = [KeyboardPreference KPBackgroundColor];
+  button.layer.borderColor = [KeyboardPreference KPBorderColor];
+  button.layer.borderWidth = 1.0f;
+  button.layer.cornerRadius = 3.0f;
+  button.tintColor = [KeyboardPreference KPTintColor];
+}
+
+- (void)setCollectionViewUIToPreference:(UICollectionView *)colview{
+  colview.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
+  colview.layer.borderColor = [KeyboardPreference KPBorderColor];
+  colview.layer.borderWidth = 1.0f;
+  //colview.layer.cornerRadius = 3.0f;
+  //button.tintColor = [KeyboardPreference KPTintColor];
 }
 
 @end

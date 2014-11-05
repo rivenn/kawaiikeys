@@ -30,42 +30,37 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Re1-he-kEN">
-                                <rect key="frame" x="16" y="103" width="568" height="440"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">UITabBarController manages a button bar and transition view, for an application with multiple top-level modes.
-To use in your application, add its view to the view hierarchy, then add top-level view controllers in order. Most clients will not need to subclass UITabBarController.</string>
-                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MXO-S9-ZN1">
+                                <rect key="frame" x="16" y="121" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KQZ-1w-vlD" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="05E-Mp-hef"/>
-                            <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" symbolic="YES" id="1OZ-oS-Eom"/>
                             <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" id="1cq-pe-swM"/>
+                            <constraint firstItem="A5M-7J-77L" firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="36R-f4-Cuk"/>
                             <constraint firstItem="KQZ-1w-vlD" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="8" id="6Rh-uA-eYU"/>
-                            <constraint firstItem="A5M-7J-77L" firstAttribute="centerX" secondItem="Re1-he-kEN" secondAttribute="centerX" id="JMX-8F-mOd"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="Re1-he-kEN" secondAttribute="bottom" constant="8" symbolic="YES" id="Tyx-g3-U4F"/>
-                            <constraint firstItem="Re1-he-kEN" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="YdJ-gX-FEA"/>
-                            <constraint firstItem="KQZ-1w-vlD" firstAttribute="centerX" secondItem="Re1-he-kEN" secondAttribute="centerX" id="dSz-Sp-Ppq"/>
+                            <constraint firstItem="A5M-7J-77L" firstAttribute="top" secondItem="KQZ-1w-vlD" secondAttribute="bottom" constant="8" symbolic="YES" id="E4d-B2-LL9"/>
+                            <constraint firstItem="MXO-S9-ZN1" firstAttribute="centerX" secondItem="A5M-7J-77L" secondAttribute="centerX" id="Krp-1v-n8u"/>
+                            <constraint firstItem="MXO-S9-ZN1" firstAttribute="top" secondItem="A5M-7J-77L" secondAttribute="bottom" constant="26" id="N7J-2m-bEm"/>
+                            <constraint firstItem="MXO-S9-ZN1" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="OfP-pO-i0D"/>
+                            <constraint firstItem="KQZ-1w-vlD" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="Ofh-U9-KhL"/>
+                            <constraint firstItem="KQZ-1w-vlD" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="8" symbolic="YES" id="PNZ-O9-lmW"/>
                             <constraint firstAttribute="centerY" secondItem="KQZ-1w-vlD" secondAttribute="centerY" id="exm-UA-ej4"/>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="Re1-he-kEN" secondAttribute="bottom" constant="8" id="gPj-oi-Pxw"/>
-                            <constraint firstItem="KQZ-1w-vlD" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="8" symbolic="YES" id="rwA-sY-KGE"/>
-                            <constraint firstItem="Re1-he-kEN" firstAttribute="top" secondItem="A5M-7J-77L" secondAttribute="bottom" constant="8" symbolic="YES" id="sLo-Sz-LdW"/>
-                            <constraint firstItem="Re1-he-kEN" firstAttribute="top" secondItem="A5M-7J-77L" secondAttribute="bottom" constant="8" id="vxM-fX-xr2"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="vxM-fX-xr2"/>
                                 <exclude reference="1cq-pe-swM"/>
                                 <exclude reference="6Rh-uA-eYU"/>
                                 <exclude reference="exm-UA-ej4"/>
-                                <exclude reference="gPj-oi-Pxw"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="textField" destination="MXO-S9-ZN1" id="jhN-4Z-wvR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
